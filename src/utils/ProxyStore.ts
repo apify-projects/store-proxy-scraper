@@ -120,9 +120,9 @@ class ProxyStore extends TypedEmitter<{ pushing: () => void; pushed: () => void 
         const dataset = await Actor.openDataset();
         const { items, count } = await dataset.getData();
 
-        log.info(`Saving ${count} proxies to a .txt file in the key-value store.`);
+        log.info(`Saving ${count} proxies to a .txt file in the ${this.#kvStoreName} key-value store.`);
         await kvStore.setValue(
-            'current-proxies',
+            'current-proxies-txt',
             (items as Proxy[]).reduce((acc, { full }) => acc.concat(`${full}\n`), ''),
             { contentType: 'text/plain' }
         );
