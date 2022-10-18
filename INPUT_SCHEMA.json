@@ -1,0 +1,36 @@
+{
+    "title": "@crawlee/cheerio typescript template",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "proxy": {
+            "title": "Proxy",
+            "type": "object",
+            "description": "Proxies to use while scraping the proxies. Recommended.",
+            "editor": "proxy"
+        },
+        "runTests": {
+            "title": "Run tests?",
+            "type": "boolean",
+            "editor": "checkbox",
+            "description": "Whether or not to test the proxies and only return the ones that pass. This will increase the actor's run-time.",
+            "default": true
+        },
+        "debug": {
+            "title": "Debug mode?",
+            "type": "boolean",
+            "editor": "checkbox",
+            "description": "Whether or not to run the actor in debug mode (with extra log messages).",
+            "default": false
+        },
+        "kvStoreName": {
+            "title": "Key-value store name",
+            "type": "string",
+            "description": "The name of the key-value store to save a .txt of the proxies in. Leave as \"default\" to save to the default one.",
+            "editor": "textfield",
+            "prefill": "default",
+            "default": "default"
+        }
+    },
+    "required": ["proxy", "kvStoreName"]
+}

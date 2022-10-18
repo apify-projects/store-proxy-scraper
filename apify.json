@@ -1,0 +1,9 @@
+{
+    "name": "proxy-scraper",
+    "version": "2.0",
+    "buildTag": "latest",
+    "env": {
+        "APIFY_MEMORY_MBYTES": "8096"
+    },
+    "template": "crawlee_cheerio_typescript"
+}
