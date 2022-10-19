@@ -5,7 +5,7 @@
   "description": "This is an example of an Apify actor.",
   "dependencies": {
     "@devhigley/test-proxy": "^1.1.1",
-    "apify": "^3.0.2",
+    "apify": "^3.1.0",
     "atob": "^2.1.2",
     "axios": "^0.27.2",
     "btoa": "^1.2.1",

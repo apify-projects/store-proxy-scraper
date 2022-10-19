@@ -28,8 +28,9 @@
             "type": "string",
             "description": "The name of the key-value store to save a .txt of the proxies in. Leave as \"default\" to save to the default one.",
             "editor": "textfield",
+            "prefill": "default",
             "default": "default"
         }
     },
-    "required": ["proxy", "kvStoreName"]
+    "required": ["proxy", "keyValueStoreName"]
 }
