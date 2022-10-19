@@ -35,6 +35,8 @@ class ProxyStore extends TypedEmitter<{ pushing: () => void; pushed: () => void 
         this.#kvStoreName = kvStoreName;
         this.#testOptions = { runTests };
 
+        console.table({ phase: 'init', kvStoreName, inClass: this.#kvStoreName });
+
         // If we want to test the proxies, launch five services in the cluster
         if (runTests)
             await Promise.all(
@@ -115,12 +117,17 @@ class ProxyStore extends TypedEmitter<{ pushing: () => void; pushed: () => void 
         // Close all services
         await this.#cluster.closeAll();
 
+        console.table({
+            phase: 'write',
+            condition: this.#kvStoreName === 'default' ? undefined : this.#kvStoreName,
+            inClass: this.#kvStoreName,
+        });
         // Push a txt file to the key-value store
         const kvStore = await Actor.openKeyValueStore(this.#kvStoreName === 'default' ? undefined : this.#kvStoreName);
         const dataset = await Actor.openDataset();
-        const { items, count } = await dataset.getData();
+        const { items } = await dataset.getData();
 
-        log.info(`Saving ${count} proxies to a .txt file in the ${this.#kvStoreName} key-value store.`);
+        log.info(`Saving ${items.length} proxies to a .txt file in the ${this.#kvStoreName} key-value store.`);
         await kvStore.setValue(
             'current-proxies-txt',
             (items as Proxy[]).reduce((acc, { full }) => acc.concat(`${full}\n`), ''),

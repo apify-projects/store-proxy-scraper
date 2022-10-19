@@ -8,6 +8,7 @@ import { agents } from './agents/index.js';
 import { Store } from './utils/ProxyStore.js';
 
 const { proxy, runTests = true, debug = false, kvStoreName = 'default' } = (await Actor.getInput<InputSchema>()) ?? {};
+console.table({ phase: 'read', kvStoreName });
 
 await Store.init({ runTests, kvStoreName });
 
@@ -18,6 +19,7 @@ if (debug) log.setLevel(LogLevel.DEBUG);
 const crawler = new CheerioCrawler({
     proxyConfiguration,
     requestHandler: router,
+    maxRequestsPerCrawl: 50,
     autoscaledPoolOptions: {
         // Starting concurrency is 1. This lets the crawler
         // hit the ground running and start scaling from 6 instead.
