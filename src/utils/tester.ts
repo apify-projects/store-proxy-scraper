@@ -7,6 +7,8 @@ import { threadId } from 'worker_threads';
 import type { InputSchema } from '../types/input.js';
 import type { Proxy } from '../types/proxy.js';
 
+// ! the api behind this could be used in the future
+// ! https://proxyscrape.com/online-proxy-checker
 const runTest = async ({ host, port }: { host: string; port: string }) => {
     return new Promise((resolve, reject) => {
         (async () => {

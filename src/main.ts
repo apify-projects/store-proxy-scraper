@@ -24,8 +24,8 @@ const crawler = new CheerioCrawler({
     // maxRequestsPerCrawl: 50,
     autoscaledPoolOptions: {
         // Starting concurrency is 1. This lets the crawler
-        // hit the ground running and start scaling from 6 instead.
-        desiredConcurrency: 6,
+        // hit the ground running and start scaling from 8 instead.
+        desiredConcurrency: 8,
     },
     sessionPoolOptions: {
         sessionOptions: {

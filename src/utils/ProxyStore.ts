@@ -131,7 +131,9 @@ class ProxyStore extends TypedEmitter<{ pushing: () => void; pushed: () => void 
             const key = proxy.full.trim();
 
             // Don't push the proxy to the queue if it's already been scraped
-            if (this.#tracked.has(key)) return false;
+            if (this.#tracked.has(key)) {
+                return false;
+            }
 
             // Otherwise, mark the proxy as tracked and include it in the final list
             this.#tracked.set(key, 1);

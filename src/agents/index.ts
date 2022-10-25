@@ -22,8 +22,11 @@ import { freeProxyListCc } from './freeProxyListCc.js';
 import { proxyScanHttp, proxyScanHttps, proxyScanSocks4, proxyScanSocks5 } from './proxyScan.js';
 import { monosansHttp, monosansSocks4, monosansSocks5 } from './monosans.js';
 import { theSpeedXHttp, theSpeedXSocks4, theSpeedXSocks5 } from './theSpeedX.js';
+// import { freeProxyCz } from './freeProxyCz.js';
+import { freeProxyPro } from './freeProxyPro.js';
 
 export const agents: Agent[] = [
+    freeProxyPro,
     theSpeedXHttp,
     theSpeedXSocks4,
     theSpeedXSocks5,
@@ -67,4 +70,5 @@ export const agents: Agent[] = [
     proxyScrapeHttp,
     proxyScrapeSocks4,
     proxyScrapeSocks5,
+    //////////////freeProxyCz,
 ];
