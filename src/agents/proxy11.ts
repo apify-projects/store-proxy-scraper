@@ -1,7 +1,19 @@
 import { generateAgent } from '../utils/generateAgent.js';
 import type { Controller } from '../types/agent.js';
+import { proxyDataFromTable } from '../utils/proxyDataFromTable.js';
 
 const controller: Controller = ({ $ }) => {
+    return proxyDataFromTable(
+        { $, rows: 'tbody tr' },
+        {
+            host: 1,
+            port: 2,
+            anonymity: 3,
+            country: 4,
+            protocol: null,
+        }
+    );
+
     return [...$('tbody tr')].map((item) => {
         const elem = $(item);
 
