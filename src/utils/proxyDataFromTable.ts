@@ -5,12 +5,23 @@ import type { Except } from 'type-fest';
 type CheerioAPI = ReturnType<typeof load>;
 
 type ProxyDataFromTableOptions = {
+    /**
+     * Cheerio object
+     */
     $: CheerioAPI;
+    /**
+     * The selector for all the rows.
+     */
     rows: string;
 };
 
+/**
+ * Properties with either a number defining the position the data has in the row, or a selector to be used.
+ */
 type ProxyDataFromTableConfig = {
-    [K in keyof Except<Proxy, 'full'>]?: number | string;
+    [K in keyof Except<Proxy, 'full' | 'anonymity' | 'country'>]: number | string;
+} & {
+    [K in keyof Except<Proxy, 'full' | 'host' | 'port' | 'protocol'>]?: number | string;
 };
 
 const proxyFields: (keyof Proxy)[] = ['host', 'port', 'full', 'anonymity', 'country', 'protocol'];

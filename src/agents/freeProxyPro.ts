@@ -1,6 +1,7 @@
 import { RequestOptions } from 'crawlee';
 import { v4 } from 'uuid';
 import { generateAgent } from '../utils/generateAgent.js';
+import { proxyDataFromTable } from '../utils/proxyDataFromTable.js';
 
 export const freeProxyPro = generateAgent('https://freeproxy.pro/', async ({ crawler, $, request: { userData, label } }) => {
     const { lastPage, currentPage } = userData as { lastPage: number; currentPage: number };
@@ -32,18 +33,13 @@ export const freeProxyPro = generateAgent('https://freeproxy.pro/', async ({ cra
         await crawler.addRequests(requests);
     }
 
-    return [...$('tbody > tr')].map((item) => {
-        const elem = $(item);
-        const host = elem.find('td:first-child').text().trim();
-        const port = elem.find('td:nth-child(2)').text().trim();
-
-        return {
-            host,
-            port,
-            full: `${host}:${port}`,
-            country: elem.find('td:nth-child(3)').text().trim(),
-            protocol: elem.find('td:nth-child(9)').text().trim(),
-            anonymity: null,
-        };
-    });
+    return proxyDataFromTable(
+        { $, rows: 'tbody > tr' },
+        {
+            host: 1,
+            port: 2,
+            country: 3,
+            protocol: 9,
+        }
+    );
 });

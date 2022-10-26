@@ -38,7 +38,7 @@ class ProxyStore extends TypedEmitter<{ pushing: () => void; pushed: () => void 
             await Promise.all(
                 [...Array(5).keys()].map(() =>
                     this.#cluster.launchService({
-                        // ! logs some weird exception
+                        // ! logs some weird exception that is strange that it's not caught
                         // exceptionHandler({ error }) {
                         //     log.error(`Unexpected exception caught in service:`);
                         //     console.log(error);
