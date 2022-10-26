@@ -29,7 +29,7 @@ import { vpnSide } from './vpnSide.js';
 import { ipRoyal } from './ipRoyal.js';
 
 export const agents: Agent[] = [
-    // ipRoyal,
+    ipRoyal,
     // vpnSide,
     // scrapingAnt,
     // freeProxyPro,

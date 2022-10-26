@@ -9,6 +9,7 @@
     "atob": "^2.1.2",
     "axios": "^0.27.2",
     "btoa": "^1.2.1",
+    "cheerio": "^1.0.0-rc.12",
     "crawlee": "^3.1.0",
     "hpagent": "^1.1.0",
     "nanolith": "^0.1.2",
@@ -21,9 +22,11 @@
     "@apify/tsconfig": "^0.1.0",
     "@types/atob": "^2.1.2",
     "@types/btoa": "^1.2.3",
+    "@types/cheerio": "^0.22.31",
     "@types/node": "^18.7.6",
     "@types/uuid": "^8.3.4",
     "ts-node": "^10.9.1",
+    "type-fest": "^3.1.0",
     "typescript": "^4.7.4"
   },
   "scripts": {
