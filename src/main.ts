@@ -8,9 +8,7 @@ import { agents } from './agents/index.js';
 import { Store } from './utils/ProxyStore.js';
 
 await Actor.init();
-
 const { proxy, runTests = true, debug = false, kvStoreName = 'default' } = (await Actor.getInput<InputSchema>()) ?? {};
-
 await Store.init({ runTests, kvStoreName });
 
 const proxyConfiguration = await Actor.createProxyConfiguration(proxy);
