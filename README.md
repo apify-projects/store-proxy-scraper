@@ -1,33 +1,72 @@
-# Crawlee + CheerioCrawler + TypeScript project
+## Why use Proxy Scraper?
+There are lots of free public proxies available out there, such as [Geonode](https://geonode.com/free-proxy-list/) and [free-proxy-list.net](https://free-proxy-list.net/). All proxies listed on these sites vary in terms quality, speed, and security. Some of them are painfully slow, while others don't work at all.
 
-This template is a production ready boilerplate for developing with `CheerioCrawler`. Use this to bootstrap your projects using the most up-to-date code.
+This very simple proxy scraper searches a number of different free-proxy websites and scrapes all of them. Then, optionally, it can test each of those proxies for you on a specified target and timeout, then only return back the proxies which pass the test. Proxy Scraper is the best way to quickly obtain a list of working public proxies. It has a straightforward configuration process, fast runtimes, and reliable outputs.
 
-If you're looking for examples or want to learn more visit:
+## Just need to web scrape using proxies?
+If you just want to use proxy servers for web scraping, [Apify Proxy](https://apify.com/proxy) gives you both residential and datacenter proxies, intelligent proxy rotation, and a large pool of IP addresses. Even better, if you run your web scrapers on the Apify platform, our industry-leading browser fingerprinting research will make your scraping bots indistinguishable from humans.
 
-- [Tutorial](https://sdk.apify.com/docs/guides/getting-started#cheeriocrawler-aka-jquery-crawler)
-- [Documentation](https://sdk.apify.com/docs/api/cheerio-crawler)
-- [Examples](https://sdk.apify.com/docs/examples/cheerio-crawler)
+## What does Proxy Scraper do?
+Proxy Scraper performs two key tasks every time you run it:
+- It scrapes all currently available proxies from 17 different free proxy websites and APIs
+- It individually tests each proxy
 
-## Documentation reference
+This makes the process of retrieving data from free proxy websites much more accessible, as it removes the need to check each proxy manually.
 
-- [Apify SDK](https://sdk.apify.com/)
-- [Apify Actor documentation](https://docs.apify.com/actor)
-- [Apify CLI](https://docs.apify.com/cli)
+## What are Proxy Scraper's limitations?
+Currently, Proxy Scraper can find anywhere from 20-60 reliable proxies out of the 2,500 that it scrapes every run. In the future, Proxy Scraper will scrape proxies from more than just the 17 sources currently being used.
 
-## Writing a README
+## How much does it cost to use Proxy Scraper?
+With an Apify Free plan, you can run the scraper 400 times (about 10 times a day to get a fresh list of working proxies). You get 4,000 runs with a Personal plan, and 40,000 runs with a Team plan. Check out [Apify pricing](https://apify.com/pricing) to see which plan is best for you.
 
-See our tutorial on [writing READMEs for your actors](https://help.apify.com/en/articles/2912548-how-to-write-great-readme-for-your-actors) if you need more inspiration.
+## Input example
+```JSON
+{
+    "testProxies": true,
+    "testTimeout": 7,
+    "testTarget": "https://google.com",
+    "kvStoreName": "reliable-proxies-store",
+    "pushToKvStore": true,
+    "datasetName": "test-dataset"
+}
+```
 
-### Table of contents
+## Output example
+The output will be an array of objects looking like this:
 
-If your README requires a table of contents, use the template below and make sure to keep the `<!-- toc start -->` and `<!-- toc end -->` markers.
+```JSON
+{
+  "host": "164.27.6.74", // string
+  "port": 8080, // number
+  "full": "164.27.6.74:8080" // string
+}
+```
 
-<!-- toc start -->
-- Introduction
-- Use Cases
-    - Case 1
-    - Case 2
-- Input
-- Output
-- Miscellaneous
- <!-- toc end -->
+## What's happening under the hood?
+1. All of the current proxies from these free proxy resources are added to the request queue (with certain filters applied):
+
+-   https://free-proxy-list.net/
+-   https://www.sslproxies.org/
+-   https://www.us-proxy.org/
+-   https://www.socks-proxy.net/
+-   https://proxylist.geonode.com
+-   https://geonode.com/free-proxy-list/
+-   https://spys.one/en/
+-   https://vpnoverview.com/privacy/anonymous-browsing/free-proxy-servers/
+-   https://hidemy.name/en/proxy-list/
+-   https://www.proxynova.com/proxy-server-list/
+-   https://free-proxy-list.com/
+-   https://anonymouse.cz/proxy-list/
+-   https://www.coderduck.com/free-proxy-list
+-   https://www.proxyrack.com/free-proxy-list/
+-   https://www.proxy-list.download
+-   https://www.proxyscan.io/
+-   http://pubproxy.com
+
+2. Each site is scraped, and the results are stored temporarily in a global state
+
+3. Each scraped proxy is tested by making a request to a target URL specified by you with a specific timeout set. If the request fails, the proxy is removed from the list.
+
+4. All duplicate results are cleaned from the list.
+
+5. The proxies are finally pushed to the dataset.
