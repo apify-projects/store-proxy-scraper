@@ -7,7 +7,13 @@
             "title": "Proxy",
             "type": "object",
             "description": "Proxies to use while scraping the proxies. Recommended.",
-            "editor": "proxy"
+            "editor": "proxy",
+            "prefill": {
+                "useApifyProxy": true
+              },
+            "default": {
+                 "useApifyProxy": true
+              },
         },
         "runTests": {
             "title": "Run tests?",
