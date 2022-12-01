@@ -80,6 +80,6 @@ The output will be an array of objects looking like this:
 
 3. Each scraped proxy is tested by making a request to a target URL specified by you with a specific timeout set. If the request fails, the proxy is removed from the list.
 
-4. All duplicate results are cleaned from the list.
+4. All duplicate results are cleaned from the list. 
 
 5. The proxies are finally pushed to the dataset.
